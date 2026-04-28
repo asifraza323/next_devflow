@@ -3,16 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/url";
+import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/util";
 
 interface Props {
   route: string;
-  imgSrc: string;
+  imgUrl: string;
   placeholder: string;
   otherClasses?: string;
 }
 
-const LocalSearch = ({ imgSrc, route, placeholder, otherClasses }: Props) => {
+const LocalSearch = ({ imgUrl, route, placeholder, otherClasses }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -55,7 +55,7 @@ const LocalSearch = ({ imgSrc, route, placeholder, otherClasses }: Props) => {
       className={`background-light800_darkgradient rounded-[10px] min-h-[56px] flex grow items-center gap-4 px-4 ${otherClasses}`}
     >
       <Image
-        src={imgSrc}
+        src={imgUrl}
         width={24}
         height={24}
         alt="Search"

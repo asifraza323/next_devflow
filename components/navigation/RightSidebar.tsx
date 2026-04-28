@@ -1,53 +1,58 @@
-import ROUTES from "@/constants/routes";
+import Routes from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import TagCard from "../cards/TagCard";
+import TagsCard from "../cards/TagsCard";
+
 const hotQuestions = [
-  { _id: 1, title: "what is custom hook in React.js?" },
-  { _id: 2, title: "how react query works in React.js?" },
-  { _id: 3, title: "how to use Redux toolkit?" },
-  { _id: 4, title: "what is React Router in React.js?" },
-  { _id: 5, title: "what is Context API in React.js?" },
+  { _id: 1, title: "what is useEffect in react.js?" },
+  { _id: 2, title: "what is Context API in react.js?" },
+  { _id: 3, title: "what is React Query?" },
+  { _id: 4, title: "what is custom hooks in react.js?" },
+  { _id: 5, title: "what is Redux toolkit?" },
 ];
 const popularTags = [
-  { _id: 1, name: "react", questions: 200 },
-  { _id: 2, name: "javascript", questions: 150 },
-  { _id: 3, name: "typescript", questions: 100 },
-  { _id: 4, name: "next", questions: 50 },
-  { _id: 5, name: "react query", questions: 75 },
+  { _id: 1, name: "react.js", questions: 100 },
+  { _id: 2, name: "javascript", questions: 200 },
+  { _id: 3, name: "React Query?", questions: 75 },
+  { _id: 4, name: "Next", questions: 150 },
+  { _id: 5, name: "Typescript", questions: 50 },
 ];
+
 const RightSidebar = () => {
   return (
-    <section className="custom-scrollbar overflow-y-auto p-6 pt-36 background-light900_dark200 light-border border-l sticky right-0 top-0 shadow-light-300 dark:shadow-none w-[350px] flex flex-col justify-between max-xl:hidden h-screen gap-6">
+    <section className="p-6 pt-36 custom-scrollbar overflow-y-auto flex flex-col justify-between gap-5 sticky right-0 top-0 shadow-light-300 dark:shadow-none light-border border-l h-screen max-xl:hidden lg:w-[350px] background-light900_dark200">
       <div>
-        <h3 className="h3-bold text-dark200_light900">Hot Questions</h3>
+        <h3 className="h3-bold text-light200_dark900">Top Questions</h3>
         <div className="mt-7 flex w-full flex-col gap-[30px]">
-          {hotQuestions.map(({ _id, title }) => (
+          {hotQuestions.map((question) => (
             <Link
-              href={ROUTES.PROFILE(_id.toString())}
-              key={_id}
-              className="flex items-center justify-between gap-3 cursor-pointer"
+              href={Routes.PROFILE(question._id.toString())}
+              key={question._id}
+              className="flex cursor-pointer items-center justify-between gap-6"
             >
-              <p className="body-medium text-dark500_light700">{title}</p>
+              <p className="body-medium text-dark500_light700">
+                {question.title}
+              </p>
               <Image
                 src="/icons/chevron-right.svg"
                 width={20}
                 height={20}
                 className="invert-colors"
-                alt="chevron"
+                alt="chevron-right"
               />
             </Link>
           ))}
         </div>
       </div>
-      <div className="mt-15">
+      {/* Tags */}
+      <div className="mt-16">
         <h3 className="h3-bold text-dark200_light900">Popular Tags</h3>
-        <div className="mt-7 flex flex-col gap-4">
+        <div className="flex mt-7 flex-col gap-6">
           {popularTags.map(({ _id, name, questions }) => (
-            <TagCard
+            <TagsCard
               key={_id}
-              _id={_id}
+              _id={_id.toString()}
               name={name}
               questions={questions}
               showCount

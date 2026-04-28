@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/url";
+import { useRouter, useSearchParams } from "next/navigation";
+import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/util";
 
 const filters = [
   { name: "React", value: "react" },
-  { name: "Javascript", value: "javascript" },
+  { name: "JavaScript", value: "javascript" },
   // { name: "Newest", value: "newest" },
   // { name: "Popular", value: "popular" },
   // { name: "Unanswered", value: "unanswered" },
@@ -35,16 +35,15 @@ const HomeFilter = () => {
         value: filter.toLowerCase(),
       });
     }
-
     router.push(newUrl.startsWith("?") ? newUrl : `?${newUrl}`, {
       scroll: false,
     });
   };
   return (
-    <div className="mt-10 hidden flex-wrap gap-3 sm:flex">
+    <div className="mt-10 w-full hidden flex-wrap sm:flex gap-3">
       {filters.map((filter) => (
         <Button
-          key={filter.name}
+          key={filter.value}
           className={cn(
             `cursor-pointer capitalize px-6 py-3 rounded-lg body-medium shadow-none`,
             active === filter.value
@@ -53,7 +52,7 @@ const HomeFilter = () => {
           )}
           onClick={() => handleTypeClick(filter.value)}
         >
-          {filter.name}
+          {filter.value}
         </Button>
       ))}
     </div>

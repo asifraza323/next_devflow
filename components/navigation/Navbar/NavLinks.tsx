@@ -1,35 +1,20 @@
 "use client";
-
+import { SheetClose } from "@/components/ui/sheet";
+import { sidebarLinks } from "@/constants";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-import { SheetClose } from "@/components/ui/sheet";
-import { sidebarLinks } from "@/constants";
-import { cn } from "@/lib/utils";
-
-const NavLinks = ({
-  isMobileNav = false,
-  userId,
-}: {
-  isMobileNav?: boolean;
-  userId?: string;
-}) => {
+const NavLinks = ({ isMobileNav = false }: { isMobileNav?: boolean }) => {
   const pathname = usePathname();
-
   return (
     <>
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
           pathname === item.route;
-
-        if (item.route === "/profile") {
-          if (userId) item.route = `${item.route}/${userId}`;
-          else return null;
-        }
-
         const LinkComponent = (
           <Link
             href={item.route}
@@ -43,10 +28,10 @@ const NavLinks = ({
           >
             <Image
               src={item.imgURL}
-              alt={item.label}
               width={20}
               height={20}
               className={cn({ "invert-colors": !isActive })}
+              alt={item.label}
             />
             <p
               className={cn(
@@ -58,7 +43,6 @@ const NavLinks = ({
             </p>
           </Link>
         );
-
         return isMobileNav ? (
           <SheetClose asChild key={item.route}>
             {LinkComponent}
