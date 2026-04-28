@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import { ReactNode } from "react";
 
 import "./globals.css";
+import ThemeProvider from "@/context/Theme";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
@@ -27,9 +29,8 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -37,15 +38,20 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
       </head>
-        <body
-          className={`${inter.className} ${spaceGrotesk.variable} antialiased`}
+
+      <body
+        className={`${inter.className} ${spaceGrotesk.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableColorScheme
+          disableTransitionOnChange
         >
-            
-
-            {children}
-
-        </body>
-   
+          {children}
+        </ThemeProvider>
+        <Toaster />
+      </body>
     </html>
   );
 };
