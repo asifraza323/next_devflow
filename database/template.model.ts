@@ -1,8 +1,10 @@
 import { model, models, Schema, Types } from "mongoose";
 
-export interface IModel {}
+export interface ICollection {}
 
-const ModelSchema = new Schema<IModel>({});
+const CollectionSchema = new Schema<ICollection>({});
 
-const Model = models?.ModelSchema || model<IModel>("Model", ModelSchema);
-export default Model;
+const Collection =
+  models?.CollectionSchema ||
+  model<ICollection>("Collection", CollectionSchema);
+export default Collection;
